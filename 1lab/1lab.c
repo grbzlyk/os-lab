@@ -16,25 +16,25 @@ int rv;
 
 switch(pid=fork()) {
     case -1: perror("fork");
-        /* произошла ошибка */
-        exit(1); /*выход из родительского процесса*/
+        /* ОШИБОЧКА ВЫШЛА */
+        exit(1); /* ПОКА РОДИТЕЛИ */
     case 0:
-        printf(" CHILD: Это процесс-потомок!\n");
-        printf(" CHILD: Мой PID -- %d\n", getpid());
-        printf(" CHILD: PID моего родителя -- %d\n", getppid());
-        printf(" CHILD: Введите мой код возврата (как можно меньше):");
+        printf(" CHILD: Цей  процесс-дитина!\n");
+        printf(" CHILD: Мiй PID -- %d\n", getpid());
+        printf(" CHILD: PID мого батька -- %d\n", getppid());
+        printf(" CHILD: Введiть мiй код повернення (як можно меньше):");
         scanf("%d",&rv);
-        printf(" CHILD: Выход!\n");
+        printf(" CHILD: Вихiд!\n");
         atexit(print);
         break;
     default:
-        printf("PARENT: Это процесс-родитель!\n");
-        printf("PARENT: Мой PID -- %d\n", getpid());
-        printf("PARENT: PID моего потомка %d\n",pid);
-        printf("PARENT: Я жду, пока потомок не вызовет exit()...\n");
+        printf("PARENT: Цей процесс-батько!\n");
+        printf("PARENT: Мiй PID -- %d\n", getpid());
+        printf("PARENT: PID моэй дитины %d\n",pid);
+        printf("PARENT: Я чекаю, поки дитина не викликаэ exit()...\n");
         wait(0);
-        printf("PARENT: Код возврата потомка:%d\n", WEXITSTATUS(rv));
-        printf("PARENT: Выход!\n");
+        printf("PARENT: Код повернення дитины:%d\n", WEXITSTATUS(rv));
+        printf("PARENT: Вихiд!\n");
         atexit(print);
         exit(rv);
         break;
